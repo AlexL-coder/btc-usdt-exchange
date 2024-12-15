@@ -1,0 +1,17 @@
+const hre = require("hardhat");
+
+async function main() {
+    const BTCUSDTExchange = await hre.ethers.getContractFactory("BTCUSDTExchange");
+    const exchange = await BTCUSDTExchange.deploy(
+        "0xMockBTCPriceFeedAddress",
+        "0xMockUSDTPriceFeedAddress"
+    );
+
+    await exchange.deployed();
+    console.log("BTCUSDTExchange deployed to:", exchange.address);
+}
+
+main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});
